@@ -10,6 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableExporterModule } from 'mat-table-exporter';
 import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSelectModule } from '@angular/material/select';
 import { DatePipe } from '@angular/common';
 
 import { AppComponent } from './app.component';
@@ -35,6 +36,7 @@ import { AppRoutingModule } from './app-routing.module';
     MatTableExporterModule,
     MatButtonModule,
     BrowserAnimationsModule,
+    MatSelectModule,
     AppRoutingModule
   ],
   providers: [
