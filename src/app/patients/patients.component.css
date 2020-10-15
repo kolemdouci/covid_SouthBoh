@@ -1,0 +1,56 @@
+.flex-container {
+  display: flex;
+  padding-left: 20px;
+  padding-top: 5px;
+}
+
+.exporters {
+  padding-left: 50px;
+  padding-top: 5px;
+}
+
+.container {
+  background-color: aquamarine;
+}
+
+.mat-column-datum {
+  flex: none;
+  width: 100px;
+}
+
+.mat-column-vek {
+  flex: none;
+  width: 100px;
+}
+
+.mat-column-pohlavi {
+  flex: none;
+  width: 100px;
+}
+
+.mat-column-kraj_nuts_kod {
+  flex: none;
+  width: 100px;
+}
+
+.mat-column-okres_lau_kod {
+  flex: none;
+  width: 100px;
+}
+
+.mat-column-nakaza_v_zahranici {
+  flex: none;
+  width: 150px;
+}
+
+.mat-column-nakaza_zeme_csu_kod {
+  flex: none;
+  width: 100px;
+}
+
+
+/* .filter {
+  padding-left: 20px;
+  padding-top: 5px;
+}
+ */
