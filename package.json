@@ -21,7 +21,11 @@
     "@angular/platform-browser": "~9.1.9",
     "@angular/platform-browser-dynamic": "~9.1.9",
     "@angular/router": "~9.1.9",
+    "angular-plotly.js": "^3.0.0",
+    "chart.js": "^2.9.4",
     "mat-table-exporter": "^9.0.2",
+    "ngx-bootstrap": "^6.1.0",
+    "plotly.js": "^1.57.1",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

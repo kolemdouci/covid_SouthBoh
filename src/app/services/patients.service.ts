@@ -14,4 +14,8 @@ export class PatientsService {
     return this.http.get('https://onemocneni-aktualne.mzcr.cz/api/v2/covid-19/osoby.json')
   }
 
+  getDeaths(): Observable<any> {
+    return this.http.get('https://onemocneni-aktualne.mzcr.cz/api/v2/covid-19/umrti.json')
+  }
+
 }

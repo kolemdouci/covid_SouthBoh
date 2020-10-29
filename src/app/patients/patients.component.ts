@@ -1,6 +1,7 @@
+import { DataService } from './../services/data.service';
 import { PatientsService } from './../services/patients.service';
 import { Patients } from './../models/patients';
-import { Component, OnChanges, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { filter, tap, pluck, map } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -15,27 +16,8 @@ import { DatePipe } from '@angular/common';
 })
 export class PatientsComponent implements OnInit {
 
-  selectedRegion: string = 'CZ0311';
-  regionSelected(e) {
-    this.selectedRegion = e.value;
-    this.patientService.getPatients().pipe(
-      pluck('data'),
-    )
-      .subscribe(result => {
-
-        // filter only CB patients
-        this.cbPatients = result.filter((data) => data.okres_lau_kod === this.selectedRegion);
-        // calculate daily increase in CB only
-        this.dailyIncrease = this.cbPatients.filter((data) => data.datum === this.yesterday).length;
-        // provide data to Ang Mat table
-        this.dataSource.data = this.cbPatients;
-        // calculate men patients in CB
-        this.menCount = this.cbPatients.filter((data) => data.pohlavi === this.sexDefault).length;
-      })
-  }
-
   cbPatients: Patients[] = [];
-  regPatients: Patients[];
+  regionPatients: Patients[] = [];
   menCount: number;
 
   sexDefault = 'M';
@@ -48,11 +30,60 @@ export class PatientsComponent implements OnInit {
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  constructor(private patientService: PatientsService, private datePipe: DatePipe) {
+
+  selectedRegion: string = 'CZ0311';
+  region: string = 'Ceske Budejovice';
+
+  constructor(private patientService: PatientsService, private datePipe: DatePipe, private dataService: DataService) {
 
   }
 
+  regionSelected(e) {
+    this.selectedRegion = e.value;
+
+    switch (this.selectedRegion) {
+      case 'CZ0311':
+        this.region = "Ceske Budejovice";
+        break;
+      case 'CZ0312':
+        this.region = "Cesky Krumlov";
+        break;
+      case 'CZ0313':
+        this.region = "Jindrichuv Hradec";
+        break;
+      case 'CZ0314':
+        this.region = "Pisek";
+        break;
+      case 'CZ0315':
+        this.region = "Prachatice";
+        break;
+      case 'CZ0316':
+        this.region = "Strakonice";
+        break;
+      case 'CZ0317':
+        this.region = "Tabor";
+        break;
+    }
+
+    this.patientService.getPatients().pipe(
+      pluck('data'),
+    )
+      .subscribe(result => {
+
+        // filter patients based on district
+        this.cbPatients = result.filter((data) => data.okres_lau_kod === this.selectedRegion);
+        // calculate daily increase in district
+        this.dailyIncrease = this.cbPatients.filter((data) => data.datum === this.yesterday).length;
+        // provide data to Ang Mat table
+        this.dataSource.data = this.cbPatients;
+        // calculate men patients in district
+        this.menCount = this.cbPatients.filter((data) => data.pohlavi === this.sexDefault).length;
+      })
+  }
+
   ngOnInit(): void {
+
+    //this.dataService.currentSource.subscribe(source => this.cbPatients)
 
     // get previous day in correct format
     let currentDate = new Date();
@@ -60,9 +91,9 @@ export class PatientsComponent implements OnInit {
     this.yesterday = this.datePipe.transform(currentDate,"yyyy-MM-dd");
 
     this.patientService.getPatients().pipe(
-      tap(data => console.log(data)),
+      //tap(data => console.log(data)),
       pluck('data'),            // select "data" property
-      tap(data => console.log(data)),
+      //tap(data => console.log(data)),
       //filter(data => data.okres_lau_kod === 'CZ0311'),   NEFAKA!!!!!!!!
 
     )

@@ -21,7 +21,7 @@
 </mat-form-field>
 
 <div class="container">
-  <div style="margin: auto; padding: 15px 50px 20px 50px;" *ngIf="cbPatients">In district Ceske Budejovice we have had altogether <span [innerText]="cbPatients.length" > </span> COVID patients</div>
+  <div style="margin: auto; padding: 15px 50px 20px 50px;" *ngIf="cbPatients">In district {{region}} we have had altogether <span [innerText]="cbPatients.length" > </span> COVID patients</div>
 
   <div style="margin: auto; padding: 0 50px 20px 50px;" *ngIf="cbPatients">Out of it there is {{menCount}} MEN patients</div>
 
@@ -94,6 +94,9 @@
 </mat-table>
 
 <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+<app-charts [regionPatients]="cbPatients" [selectedRegion]="selectedRegion"></app-charts>
+
 
 
 

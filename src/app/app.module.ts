@@ -18,12 +18,17 @@ import { PatientsComponent } from './patients/patients.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AppRoutingModule } from './app-routing.module';
 
+import { ChartsComponent } from './charts/charts.component';import * as PlotlyJS from 'plotly.js/dist/plotly.js';
+import { PlotlyModule } from 'angular-plotly.js';
+
+PlotlyModule.plotlyjs = PlotlyJS;
 
 @NgModule({
   declarations: [
     AppComponent,
     PatientsComponent,
-    NavbarComponent
+    NavbarComponent,
+    ChartsComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +42,8 @@ import { AppRoutingModule } from './app-routing.module';
     MatButtonModule,
     BrowserAnimationsModule,
     MatSelectModule,
-    AppRoutingModule
+    AppRoutingModule,
+    PlotlyModule
   ],
   providers: [
     PatientsService,
